@@ -1,0 +1,34 @@
+@()
+
+@moreScripts = {
+    <script src='@routes.Assets.at("scripts/index.js")'
+    type="text/javascript" charset="utf-8"></script>
+}
+
+@main("SiteMap generator", moreScripts) {
+    <!-- Urls for WebSocket and Ajax requests
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    @*<input type="hidden" id="last-ten-posts-url" value="@org.spend.devblog.controller.routes.IndexController.getTen(0)"/>*@
+    @*<input type="hidden" id="new-posts-ws-url" value="@org.spend.devblog.controller.routes.IndexController.newPostsWebSocket().webSocketURL(request)"/>*@
+    @*<input type="hidden" id="save-post-url" value="@org.spend.devblog.controller.routes.IndexController.newPost()"/>*@
+
+    <!-- Page
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <h1 class="main_text">SiteMap generator by Anatoliy_Papenko &lt;privettoli@@gmail.com&gt;</h1>
+    <ul id="posts"></ul>
+    <div>
+        <div class="row">
+            <label for="urlText">Url</label>
+        </div>
+        <div class="row">
+            <input id="urlText" type="text" class="u-full-width">
+        </div>
+        <div class="row">
+            <input id="sendToEmail" type="checkbox" name="sendToEmail" class="inlineBlock"/>
+            <label for="sendToEmail" style="display : inline-block">Send results to my email</label>
+        </div>
+        <div class="row">
+            <input id="generateButton" type="submit" value="Generate" class="button-primary"/>
+        </div>
+    </div>
+}
