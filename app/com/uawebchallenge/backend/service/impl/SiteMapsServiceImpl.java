@@ -10,14 +10,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import play.Logger;
 import play.libs.F.Promise;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static java.util.Optional.ofNullable;
@@ -67,8 +65,7 @@ public class SiteMapsServiceImpl implements SiteMapsService {
             final Document site = Jsoup.parse(response.getBody());
             final SiteMapUrl siteMapUrl = new SiteMapUrl();
             siteMapUrl.setLocation(link.toString());
-            final Optional<String> date = ofNullable(response.getHeader("Last-Modified"));
-            date.ifPresent(siteMapUrl::setModifiedDate);
+            ofNullable(response.getHeader("Last-Modified")).ifPresent(siteMapUrl::setModifiedDate);
             //pLogger.error(siteMapUrl.toString());
 
             if (depth >= 0) {
