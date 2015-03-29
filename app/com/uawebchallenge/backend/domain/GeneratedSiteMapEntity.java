@@ -28,7 +28,6 @@ import static org.hibernate.annotations.LazyCollectionOption.TRUE;
 public class GeneratedSiteMapEntity extends AbstractEntity {
     String url;
 
-    @Lob
     @ElementCollection(fetch = EAGER)
     List<byte[]> urlSets;
 }
