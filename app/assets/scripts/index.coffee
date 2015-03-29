@@ -1,4 +1,22 @@
-
+$('#generateButton').click ->
+  urlPath = '/sitemaps'
+  urlText = $('#urlText').val();
+  depth = $('#depth').val();
+  fullUrl = urlPath + "?incomingUrl=#{urlText}"
+  if depth.length > 0
+    fullUrl += "&depth=#{depth}"
+  $.ajax({
+    type: 'POST',
+    url: fullUrl
+  }).done((result) ->
+    link = $('<a>')
+    link.attr('href', result.downloadAsZipUrl)
+    link.text(result.url)
+    $('#links').append link
+    $('#links').append $('<br>')
+  ).fail((result) ->
+    window.alert(result);
+  )
 ###
 initUi = ->
   if $(".error")?

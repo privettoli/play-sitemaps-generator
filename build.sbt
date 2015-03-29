@@ -18,7 +18,8 @@ libraryDependencies ++= Seq(javaWs,
   "javax.persistence"         % "persistence-api"               % "latest.integration",
   "com.thoughtworks.xstream"  % "xstream"                       % "latest.integration",
   "commons-validator"         % "commons-validator"             % "latest.integration",
-  "org.jsoup"                 % "jsoup"                         % "latest.integration"
+  "org.jsoup"                 % "jsoup"                         % "latest.integration",
+  "com.thoughtworks.xstream"  % "xstream"                       % "latest.integration"
 )
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")

@@ -6,15 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.LazyCollection;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 import static lombok.AccessLevel.PRIVATE;
+import static org.hibernate.annotations.LazyCollectionOption.FALSE;
 import static org.hibernate.annotations.LazyCollectionOption.TRUE;
 
 @Data
@@ -27,7 +27,8 @@ import static org.hibernate.annotations.LazyCollectionOption.TRUE;
 @EqualsAndHashCode(callSuper = true)
 public class GeneratedSiteMapEntity extends AbstractEntity {
     String url;
-    @ElementCollection
-    @LazyCollection(TRUE)
-    List<byte[]> xml;
+
+    @Lob
+    @ElementCollection(fetch = EAGER)
+    List<byte[]> urlSets;
 }

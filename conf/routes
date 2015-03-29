@@ -3,13 +3,13 @@
 # ~~~~
 
 # Pages
-GET         /                    @com.uawebchallenge.backend.controller.PageController.index
+GET         /                        @com.uawebchallenge.backend.controller.PageController.index
 
 # REST API
-GET         /sitemaps/:id        @com.uawebchallenge.backend.controller.SiteMapController.get(id:Long)
-POST        /sitemaps            @com.uawebchallenge.backend.controller.SiteMapController.generate(incomingUrl,sendToEmail ?= null, defaultChangeFrequency ?= "always", defaultPriority ?= "1.0", depth ?= "1")
+GET         /sitemaps/:id.zip        @com.uawebchallenge.backend.controller.SiteMapController.getAsZip(id:Long)
+POST        /sitemaps                @com.uawebchallenge.backend.controller.SiteMapController.generate(incomingUrl,sendToEmail ?= null, defaultChangeFrequency ?= "always", defaultPriority ?= "1.0", depth ?= "1")
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)
 
     
