@@ -6,28 +6,24 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
+import javax.persistence.*;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 import static lombok.AccessLevel.PRIVATE;
 
+/**
+ * Created by Anatoliy Papenko on 3/30/15.
+ */
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "site_map")
-@FieldDefaults(level = PRIVATE)
+@Table(name = "site_map_data")
 @Inheritance(strategy = JOINED)
+@FieldDefaults(level = PRIVATE)
 @EqualsAndHashCode(callSuper = true)
-public class GeneratedSiteMapEntity extends AbstractEntity {
-    String url;
-
-    @OneToMany(fetch = EAGER, cascade = ALL)
-    List<UrlSetData> urlSets;
+public class UrlSetData extends AbstractEntity {
+    @Lob
+    byte[] data;
 }

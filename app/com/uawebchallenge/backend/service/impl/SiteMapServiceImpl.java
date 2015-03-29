@@ -2,6 +2,7 @@ package com.uawebchallenge.backend.service.impl;
 
 import com.google.common.collect.ImmutableSet;
 import com.uawebchallenge.backend.domain.GeneratedSiteMapEntity;
+import com.uawebchallenge.backend.domain.UrlSetData;
 import com.uawebchallenge.backend.domain.SiteMapUrl;
 import com.uawebchallenge.backend.exception.BadLinkException;
 import com.uawebchallenge.backend.repository.GeneratedSiteMapRepository;
@@ -36,7 +37,6 @@ import static java.lang.String.format;
 import static java.time.ZonedDateTime.parse;
 import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.Collections.*;
-import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -126,9 +126,9 @@ public class SiteMapServiceImpl implements SiteMapService {
                 final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 final ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)
         ) {
-            List<byte[]> urlSets = generatedSiteMapEntity.getUrlSets();
+            final List<UrlSetData> urlSets = generatedSiteMapEntity.getUrlSets();
             for (int i = 0; i < urlSets.size(); i++) {
-                byte[] urlSet = urlSets.get(i);
+                byte[] urlSet = urlSets.get(i).getData();
                 final ZipEntry zipEntry = new ZipEntry(format("sitemap (%d).xml", i + 1));
                 zipEntry.setSize(urlSet.length);
                 zipOutputStream.putNextEntry(zipEntry);

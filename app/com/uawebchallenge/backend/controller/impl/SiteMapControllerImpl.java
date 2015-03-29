@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import com.uawebchallenge.backend.controller.SiteMapController;
 import com.uawebchallenge.backend.converter.GeneratedSiteMapConverter;
 import com.uawebchallenge.backend.domain.GeneratedSiteMapEntity;
+import com.uawebchallenge.backend.domain.UrlSetData;
 import com.uawebchallenge.backend.domain.SiteMapUrlSet;
 import com.uawebchallenge.backend.service.ChangeFrequency;
 import com.uawebchallenge.backend.service.SiteMapService;
@@ -109,9 +110,11 @@ public class SiteMapControllerImpl extends Controller implements SiteMapControll
                     }
                     return sets;
                 }).flatMap(urlSets -> {
-                    final List<byte[]> urlSetsContent = urlSets.stream()
+                    final List<UrlSetData> urlSetsContent = urlSets.parallelStream()
                             .map(xStream::toXML)
-                            .map(String::getBytes).collect(toList());
+                            .map(String::getBytes)
+                            .map(UrlSetData::new)
+                            .collect(toList());
                     GeneratedSiteMapEntity generatedSiteMapEntity = new GeneratedSiteMapEntity();
                     generatedSiteMapEntity.setUrl(url.toString());
                     generatedSiteMapEntity.setUrlSets(urlSetsContent);

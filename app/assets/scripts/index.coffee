@@ -15,7 +15,7 @@ $('#generateButton').click ->
     $('#links').append link
     $('#links').append $('<br>')
   ).fail((result) ->
-    window.alert(result);
+    window.alert(result.responseText);
   )
 ###
 initUi = ->
